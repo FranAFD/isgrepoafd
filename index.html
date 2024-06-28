@@ -34,6 +34,18 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
             max-width: 500px;
             width: 90%;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: fadeInScale 1s forwards;
+            z-index: 10;
+            position: relative;
+        }
+
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .question {
@@ -91,9 +103,42 @@
             background: #ff3333;
             transform: scale(1.05);
         }
+
+        .background-animations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('file:///D:/usuarios/alumno/im%C3%A1genes/Imagenes%20para%20pagina%20web/estrellapng.png') no-repeat center center;
+            background-size: contain;
+            animation: float 1s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="background-animations" id="background-animations"></div>
     <div class="container">
         <h1>Juego de Preguntas de Informática</h1>
         <div class="question" id="question">Pregunta aquí</div>
@@ -110,20 +155,21 @@
 
     <script>
         const questions = [
+            //Preguntas de las computadoras//
             {
-                question: "¿Qué es HTML?",
-                options: ["Lenguaje de programación", "Lenguaje de marcado", "Base de datos", "Sistema operativo"],
+                question: "¿Qué es una Computadora?",
+                options: ["Máquina diseñada para procesar información y convertirlos en datos útiles", "Máquina diseñada para procesar programas y convertirlos en información útil", "Máquina diseñada para procesar datos y convertirlos en información útil", "Máquina diseñada para procesar informacion y convertirlos en programas útiles"],
+                answer: 2
+            },
+            {
+                question: "¿Cual es un elemento fundamental para el funcinamiento de una Computadora?",
+                options: ["Hardware", "Juegos", "Videos", "Imagenes"],
+                answer: 0
+            },
+            {
+                question: "¿Cual es un elemento fundamental para el funcinamiento de una Computadora?",
+                options: ["Juegos", "Software", "Imagenes", "Videos"],
                 answer: 1
-            },
-            {
-                question: "¿Qué significa CSS?",
-                options: ["Cascading Style Sheets", "Computer Style Sheets", "Creative Style Sheets", "Colorful Style Sheets"],
-                answer: 0
-            },
-            {
-                question: "¿Qué es JavaScript?",
-                options: ["Lenguaje de programación", "Lenguaje de marcado", "Base de datos", "Sistema operativo"],
-                answer: 0
             },
             {
                 question: "¿Qué es un servidor web?",
@@ -159,18 +205,70 @@
                 question: "¿Qué es un router?",
                 options: ["Dispositivo de red", "Lenguaje de programación", "Base de datos", "Sistema operativo"],
                 answer: 0
-            }
+            },
+            //Preguntas de perifericos//
+            {
+                question: "¿Cuantas clases de perifericos existen?",
+                options: ["1", "3", "4", "2"],
+                answer: 2
+            },
+            {
+                question: "¿Qué son los perifericos?",
+                options: ["Son los programas que permiten la comunicación entre el usuario y la computadora.", "Son los dispositivos que permiten la comunicación entre las aplicaciones y los usuarios.", "  Son los dispositivos que permiten la comunicación entre una aplicacion y la computadora.", "  Son los dispositivos que permiten la comunicación entre el usuario y la computadora"],
+                answer: 3
+            },
+            {
+                question: "¿Qué tipo de periferico es un teclado?",
+                options: ["Mixto", " Entrada ", "Salida", "Almacenamiento"],
+                answer: 1
+            },
+            {
+                question: "¿Qué periferico novedoso se muestra en la pagina?",
+                options: ["Dispositivo de red", "Lenguaje de programación", "Base de datos", "Sistema operativo"],
+                answer: 2
+            },
+            {
+                question: "¿Cual es un periferio Mixto?",
+                options: ["Mouse", "Parlante", "Monitor", "Modem"],
+                answer: 3
+            },
+            {
+                question: "¿Que tipo de periferico es la Impresora multifuncion?",
+                options: ["Almacenamiento", "Mixto", "Salida", "Entrada"],
+                answer: 1
+            },
+            {
+                question: "¿Qué periferico novedoso se muestra en la pagina?",
+                options: ["Mouse", "Parlante", "Monitor", "Modem"],
+                answer: 3
+            },
+            {
+                question: "¿Cual es un periferio Salida?",
+                options: ["Mouse", "Parlante", "Escaner", "Pantallas tactiles"],
+                answer: 1
+            },
+            {
+                question: "¿Cual es un periferio Entrada?",
+                options: ["Mouse", "Lentes de realidad virtual", "Monitor", "Impresora"],
+                answer: 0
+            },
+            {
+                question: "¿Que tipo de periferico es la Impresora 3D?",
+                options: ["Almacenamiento", "Entrada", "Salida", "Mixto"],
+                answer: 2
+            },
         ];
 
         let currentQuestions, currentIndex, score, lives;
 
         function startGame() {
-            currentQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 10);
+            currentQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 20);
             currentIndex = 0;
             score = 0;
             lives = 3;
             document.getElementById('score').textContent = score;
             document.getElementById('lives').textContent = lives;
+            updateBackgroundAnimations();
             showQuestion();
         }
 
@@ -203,7 +301,21 @@
                 }
             }
             currentIndex++;
+            updateBackgroundAnimations();
             showQuestion();
+        }
+
+        function updateBackgroundAnimations() {
+            const backgroundAnimations = document.getElementById('background-animations');
+            backgroundAnimations.innerHTML = ''; // Limpiar animaciones existentes
+
+            for (let i = 0; i < score; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                backgroundAnimations.appendChild(star);
+            }
         }
 
         startGame();

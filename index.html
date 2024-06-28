@@ -155,57 +155,6 @@
 
     <script>
         const questions = [
-            //Preguntas de las computadoras//
-            {
-                question: "¿Qué es una Computadora?",
-                options: ["Máquina diseñada para procesar información y convertirlos en datos útiles", "Máquina diseñada para procesar programas y convertirlos en información útil", "Máquina diseñada para procesar datos y convertirlos en información útil", "Máquina diseñada para procesar informacion y convertirlos en programas útiles"],
-                answer: 2
-            },
-            {
-                question: "¿Cual es un elemento fundamental para el funcinamiento de una Computadora?",
-                options: ["Hardware", "Juegos", "Videos", "Imagenes"],
-                answer: 0
-            },
-            {
-                question: "¿Cual es un elemento fundamental para el funcinamiento de una Computadora?",
-                options: ["Juegos", "Software", "Imagenes", "Videos"],
-                answer: 1
-            },
-            {
-                question: "¿Qué es un servidor web?",
-                options: ["Computadora que almacena páginas web", "Base de datos", "Software de diseño", "Lenguaje de programación"],
-                answer: 0
-            },
-            {
-                question: "¿Qué es una IP?",
-                options: ["Dirección de Internet", "Protocolo de Internet", "Servidor de Internet", "Lenguaje de programación"],
-                answer: 1
-            },
-            {
-                question: "¿Qué es un algoritmo?",
-                options: ["Conjunto de instrucciones", "Base de datos", "Lenguaje de programación", "Sistema operativo"],
-                answer: 0
-            },
-            {
-                question: "¿Qué es una red LAN?",
-                options: ["Red de área local", "Lenguaje de programación", "Base de datos", "Sistema operativo"],
-                answer: 0
-            },
-            {
-                question: "¿Qué es un sistema operativo?",
-                options: ["Software que gestiona hardware", "Lenguaje de programación", "Base de datos", "Aplicación de oficina"],
-                answer: 0
-            },
-            {
-                question: "¿Qué es SQL?",
-                options: ["Lenguaje de consultas", "Sistema operativo", "Red de área local", "Lenguaje de programación"],
-                answer: 0
-            },
-            {
-                question: "¿Qué es un router?",
-                options: ["Dispositivo de red", "Lenguaje de programación", "Base de datos", "Sistema operativo"],
-                answer: 0
-            },
             //Preguntas de perifericos//
             {
                 question: "¿Cuantas clases de perifericos existen?",
@@ -262,7 +211,7 @@
         let currentQuestions, currentIndex, score, lives;
 
         function startGame() {
-            currentQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 20);
+            currentQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 10);
             currentIndex = 0;
             score = 0;
             lives = 3;
